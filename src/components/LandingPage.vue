@@ -21,8 +21,20 @@
             <br>
             Leider funktioniert diese Seite derzeit nur auf iOS Geräten. Bitte schau später noch einmal vorbei!
         </div>
+
+        <footer>Made with <b-icon
+                    icon="heart"
+                    size="is-small"/> by <a href="https://yanniks.de">Yannik Ehlert</a>
+        </footer>
     </div>
 </template>
+
+<style scoped>
+    footer {
+        margin-top: 30%;
+        color: gray;
+    }
+</style>
 
 <script>
 import axios from 'axios'
