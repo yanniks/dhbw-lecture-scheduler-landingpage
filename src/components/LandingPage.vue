@@ -2,10 +2,10 @@
     <div>
         <div v-if="ios">
             <b-field label="1. Kurs wählen">
-                <b-select v-model="course" class="selector" placeholder="Kurs" rounded v-if="Object.keys(courses).length > 0">
+                <b-select style="text-align: center" v-model="course" placeholder="Kurs" rounded v-if="Object.keys(courses).length > 0">
                     <option v-for="course in Object.keys(courses)" v-bind:key="course" :value="course">{{ courses[course].title }}</option>
                 </b-select>
-                <b-select class="selector" placeholder="Kurs" rounded loading v-else></b-select>
+                <b-select style="text-align: center" placeholder="Kurs" rounded loading v-else></b-select>
             </b-field>
             <b-field v-if="course" label="2. Kalender durch klick abonnieren">
                 <div>
@@ -24,11 +24,6 @@
     </div>
 </template>
 
-<style>
-    .selector {
-        text-align: center;
-    }
-</style>
 <script>
 import axios from 'axios'
 
@@ -39,7 +34,7 @@ export default {
       courses: {},
       course: '',
       ios: !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform),
-      link: 'webcal://dhbwservices.yanniks.cloud/lectures/'
+      link: 'webcal://' + window.location.host + '/lectures/'
     }
   },
   beforeMount () {
@@ -55,7 +50,7 @@ export default {
       }, 10 * 1000)
     },
     fetchCourses () {
-      axios.get('https://dhbwservices.yanniks.cloud/courses').then(response => {
+      axios.get(window.location.origin + '/courses').then(response => {
         this.courses = response.data
       })
     }
