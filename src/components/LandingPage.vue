@@ -1,17 +1,25 @@
 <template>
     <div>
-        <div v-if="ios || macos">
+        <div v-if="ios || macos || android">
             <b-field label="1. Kurs wählen">
                 <b-select style="text-align: center" v-model="course" placeholder="Kurs" rounded v-if="Object.keys(courses).length > 0">
                     <option v-for="course in Object.keys(courses)" v-bind:key="course" :value="course">{{ courses[course].title }}</option>
                 </b-select>
                 <b-select style="text-align: center" placeholder="Kurs" rounded loading v-else></b-select>
             </b-field>
-            <b-field v-if="course" :label="secondLabel">
+            <b-field v-if="course && (ios || macos)" :label="secondLabel">
                 <div>
-                    <button :href="link + course" class="button is-primary is-medium"
+                    <button class="button is-primary is-medium"
                             @click="subscribe">
                         abonnieren
+                    </button>
+                </div>
+            </b-field>
+            <b-field v-else label="2. Kalender bei Google abonnieren">
+                <div>
+                    <button class="button is-primary is-medium"
+                            @click="subscribe">
+                        zu Google Kalender
                     </button>
                 </div>
             </b-field>
@@ -47,6 +55,7 @@ export default {
       course: '',
       macos: navigator.platform.toUpperCase().indexOf('MAC') >= 0,
       ios: !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform),
+      android: navigator.userAgent.toLowerCase().indexOf('android') > -1,
       link: 'webcal://' + window.location.host + '/lectures/',
       secondLabel: ''
     }
@@ -61,7 +70,13 @@ export default {
   },
   methods: {
     subscribe () {
-      window.location.href = this.link + this.course
+      const url = this.link + this.course
+      if (this.android) {
+        const googleBaseUrl = 'https://calendar.google.com/calendar/r?cid='
+        window.location.href = googleBaseUrl + encodeURIComponent(url)
+        return
+      }
+      window.location.href = url
       const vm = this
       vm.isLoading = true
       setTimeout(() => {
