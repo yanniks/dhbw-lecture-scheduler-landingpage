@@ -15,7 +15,7 @@
                     </button>
                 </div>
             </b-field>
-            <b-field v-else label="2. Kalender bei Google abonnieren">
+            <b-field v-else if="course && android" label="2. Kalender bei Google abonnieren">
                 <div>
                     <button class="button is-primary is-medium"
                             @click="subscribe">
