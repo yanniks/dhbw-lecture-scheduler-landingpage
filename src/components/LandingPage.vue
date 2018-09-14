@@ -39,7 +39,8 @@
         </div>
         <div v-else>
             <br>
-            Leider funktioniert diese Seite derzeit nur auf macOS und iOS Geräten. Bitte schau später noch einmal vorbei!
+            Leider funktioniert diese Seite derzeit nur auf macOS und iOS Geräten. Bitte schau später noch einmal
+            vorbei!
         </div>
 
         <footer>Made with
@@ -69,7 +70,7 @@
 </style>
 
 <script>
-  /* eslint-disable */
+/* eslint-disable */
   import axios from 'axios'
 
   export default {
@@ -81,7 +82,7 @@
         macos: navigator.platform.toUpperCase().indexOf('MAC') >= 0,
         ios: !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform),
         android: navigator.userAgent.toLowerCase().indexOf('android') > -1,
-        link: 'webcal://' + window.location.host + '/lectures/',
+        link: 'webcal://us-central1-dhbw-lecture-scheduler.cloudfunctions.net/lectures/',
         secondLabel: ''
       }
     },
@@ -109,7 +110,7 @@
         }, 10 * 1000)
       },
       fetchCourses () {
-        axios.get(window.location.origin + '/courses').then(response => {
+        axios.get('https://us-central1-dhbw-lecture-scheduler.cloudfunctions.net/courses').then(response => {
           this.courses = response.data
         })
       }
