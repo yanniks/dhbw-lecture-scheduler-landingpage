@@ -192,11 +192,11 @@ export default {
       ) {
         const url = new URL(trimmedUrl);
         const parsedKey = this.getQueryVariable(url, "key");
-        if (parsedKey !== undefined && parsedKey.length === 64) {
+        if (parsedKey !== undefined && parsedKey.length >= 64) {
           key = parsedKey;
         }
       }
-      if (trimmedUrl.indexOf("&") === -1 && trimmedUrl.length == 64) {
+      if (trimmedUrl.indexOf("&") === -1 && trimmedUrl.length >= 64) {
         key = trimmedUrl;
       }
       console.log(`New key value: ${key}`);
