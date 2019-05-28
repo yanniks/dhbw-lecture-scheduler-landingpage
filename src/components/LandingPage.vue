@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div style="margin: 5px">
       <b-field
         v-if="courseMethod == 0"
         label="Verwendet dein Kurs eine PDF-Datei oder greifst du über eine Website (Rapla) auf deinen Vorlesungsplan zu?"
@@ -84,7 +84,7 @@
 
     <footer>
       Made with
-      <b-icon icon="heart" size="is-small"/>by
+      <b-icon icon="heart" size="is-small"/> by
       <a href="https://yanniks.de">Yannik Ehlert</a>
     </footer>
   </div>
