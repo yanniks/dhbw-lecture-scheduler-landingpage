@@ -195,8 +195,7 @@ export default {
         if (parsedKey !== undefined && parsedKey.length >= 64) {
           key = parsedKey;
         }
-      }
-      if (trimmedUrl.indexOf("&") === -1 && trimmedUrl.length >= 64) {
+      } else if (trimmedUrl.indexOf("&") === -1 && trimmedUrl.length >= 64) {
         key = trimmedUrl;
       }
       console.log(`New key value: ${key}`);
